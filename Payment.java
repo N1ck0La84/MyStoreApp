@@ -22,7 +22,7 @@ public class Payment {
             s.setState("оплачен");}
         else {
             System.out.println("Не хватает средств");
-            System.exit(0);
+            System.exit(0); //Вернуть в начало?
             }
     }
     public String getPayType() {

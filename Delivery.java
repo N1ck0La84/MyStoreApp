@@ -7,11 +7,9 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.deliveryAddress = deliveryAddress;
     }
-
     public void getToDelivery(Storage s) {
         s.setState("передан в доставку");
     }
-
     public void orderDelivered(Client fedor, Storage s) {
         s.setState("доставлен клиенту " + fedor);
         System.out.println("По адресу: " + deliveryAddress + "; " + deliveryDate);

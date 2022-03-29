@@ -4,7 +4,7 @@ import products.Uneatable;
 
 public class Storage {
 
-    private boolean prodExists;
+    private boolean prodExists; //Реализация?
     private Product product;
     Eatable sugar;
     Uneatable teapot;

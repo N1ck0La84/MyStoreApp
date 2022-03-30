@@ -3,10 +3,9 @@ import java.util.Objects;
 public class Payment {
 
     private String payType;
-    private String paySum;
-    private String payState;
+    private float paySum;
     private Basket basket;
-    private Client fedor;
+    private Client alyosha;
 
     Payment(String payType) {
         this.payType = payType;
@@ -17,9 +16,25 @@ public class Payment {
             s.setState("ждёт оплату");
         }
     }
-    public void wasPayed(Client fedor, Storage s) {
-        if(fedor.getMoney() >= s.sugar.price+s.teapot.price) {
-            s.setState("оплачен");}
+
+    public void setPaySum(Storage s) {
+        paySum = s.sugar.price + s.teapot.price;
+        System.out.println("К оплате " + getPaySum());
+    }
+
+    public void setPayType(String payType) {
+        this.payType = payType;
+    }
+
+    public void wasPayed(Client alyosha, Storage s) {
+        if(Objects.equals(getPayType(), "безналичная") && alyosha.getMoney() >= getPaySum()) {
+            s.setState("оплачен");
+            alyosha.setMoney(alyosha.getMoney() - getPaySum());
+            System.out.println("На счету " + alyosha + " осталось " + alyosha.getMoney() + "р");
+        }
+        else if(Objects.equals(getPayType(), "наличная")) {
+            s.setState("оплата по факту доставки");
+        }
         else {
             System.out.println("Не хватает средств");
             System.exit(0); //Вернуть в начало?
@@ -29,25 +44,8 @@ public class Payment {
         return payType;
     }
 
-    public void setPayType(String payType) {
-        this.payType = payType;
-    }
-
-    public String getPaySum() {
+    public float getPaySum() {
         return paySum;
     }
-
-    public void setPaySum(String paySum) {
-        this.paySum = paySum;
-    }
-
-    public String getPayState() {
-        return payState;
-    }
-
-    public void setPayState(String payState) {
-        this.payState = payState;
-    }
-
 
 }
